@@ -8,7 +8,10 @@
 
 // console.log(result);
 
-let num = 123;
+//! 1
+let num = 266219;
+
+//! 2
 let arr = '';
 let sum = 1;
 
@@ -19,3 +22,14 @@ for (let i = 0; i < arr.length; i++) {
 };
 
 console.log(sum);
+
+//! 3
+let pow = sum ** 3;
+console.log(pow);
+
+//! 4
+let result = '';
+result = String(pow).split('');
+result = Number(result[0] + result[1])
+
+console.log(result);
