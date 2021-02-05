@@ -1,18 +1,14 @@
 'use strict';
+//1 ЗАДАНИЕ
+let arr = ['6785', '253', '89499', '41', '50696', '498892', '222'];
 
-const fnc = function (str) {
-  console.log(typeof str);
-  if (str !== String(str)) {
-    console.log('Это не строка.');
-  } else if(str === String(str)) {
-    console.log(String('Это строка.').replace(/\s+/g, ''));
-  };
+let a = arr.filter(el => { return el[0] === '2' });
+let b = arr.filter(el => { return el[0] === '4' });
 
-  if (str.length > 30){
-    console.log(String(str).substr(0, 30) + '...'); 
-  } else {
-    console.log('А эта строка меньше чем 30 символов.');
-  };
+console.log('a: ', a);
+console.log('b: ', b);
+
+//2 ЗАДАНИЕ
+for (let i = 1; i <= 100; i += 2) {
+  console.log(i + ' Делители этого числа: 1 и ' + i);
 };
-//'Строка содержит больше чем 30 символов.'
-fnc(1);
