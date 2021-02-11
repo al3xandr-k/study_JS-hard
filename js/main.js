@@ -1,14 +1,16 @@
-'use strict';
-//1 ЗАДАНИЕ
-let arr = ['6785', '253', '89499', '41', '50696', '498892', '222'];
+// 'use strict'
 
-let a = arr.filter(el => { return el[0] === '2' });
-let b = arr.filter(el => { return el[0] === '4' });
+const outText = document.querySelector('.out');
+const week = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
 
-console.log('a: ', a);
-console.log('b: ', b);
 
-//2 ЗАДАНИЕ
-for (let i = 1; i <= 100; i += 2) {
-  console.log(i + ' Делители этого числа: 1 и ' + i);
-};
+var arrays = [], size = 1;
+
+while (week.length > 0) {
+  arrays.push(week.splice(0, size));
+}
+
+outText.innerHTML = arrays;
+outText.style.display = 'flex';
+outText.style.flexDirection = 'column';
+
