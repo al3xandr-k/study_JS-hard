@@ -1,16 +1,19 @@
-// 'use strict'
+'use strict'
 
-const outText = document.querySelector('.out');
-const week = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'];
+const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+const outText1 = document.querySelector('.out1');
+const outText2 = document.querySelector('.out2');
+const outText3 = document.querySelector('.out3');
+const outText4 = document.querySelector('.out4');
+let currentDate = new Date();
 
+outText1.innerHTML = week;
 
-var arrays = [], size = 1;
-
-while (week.length > 0) {
-  arrays.push(week.splice(0, size));
+for (let i = 0; i < week.length; i++) {
+  outText2.innerHTML += week[i] + '<br>';
 }
 
-outText.innerHTML = arrays;
-outText.style.display = 'flex';
-outText.style.flexDirection = 'column';
+outText3.innerHTML = `${week.splice(0, 5)},<strong>${week.splice(-2)}</strong>`;
 
+
+outText4.innerHTML = `<strong>${currentDate.toString().split(' ').slice(0, 3).join(' ')}</strong>`;
