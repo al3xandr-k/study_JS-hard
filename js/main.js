@@ -1,12 +1,10 @@
 'use strict'
 
-const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+const week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 const outText = document.querySelector('.out');
+let str = '';
 
-for (let i = 0; i < week.length; i++) {
-  outText.innerHTML += week[i] + '<br>';
-}
+str = week.slice(1, 6).map(item => item + '<br>') + '<i>' + week.slice(6, 7) + '</i>' + '<br>' + '<strong>' + (new Date().toString().split(' ').slice(0, 3).join(' ')) + '</strong>';
 
+outText.innerHTML = str;
 
-
-// let currentDate = (new Date()).toString().split(' ').slice(0, 3).join(' ');
