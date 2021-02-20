@@ -2,18 +2,40 @@
 
 const week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 const outText = document.querySelector('.out');
-let str = '';
+const date = new Date();
+const currentDate = date.getDay();
 
-
-const currentDay = week.map();
-
-
-
-
-
-
-
-
-str = week.slice(1, 6).map(item => item + '<br>') + '<i>' + week.slice(6, 7) + '</i>' + '<br>' + '<strong>' + (new Date().toString().split(' ').slice(0, 3).join(' ')) + '</strong>';
-
-outText.innerHTML = str;
+week.map((item, index) => {
+  if (index > 0 && index < 6) {
+    if (index === currentDate) {
+      const span = document.createElement('span');
+      const br = document.createElement('br');
+      span.innerHTML = item;
+      outText.append(span);
+      outText.append(br);
+    } else {
+      const span = document.createElement('span');
+      const br = document.createElement('br');
+      span.innerHTML = item;
+      outText.append(span);
+      outText.append(br);
+    }
+  } else if (index === 0 || index === 6) {
+    if (index === currentDate) {
+      const span = document.createElement('span');
+      const br = document.createElement('br');
+      span.style.fontStyle = 'italic';
+      span.style.fontWeight = 'bold';
+      span.innerHTML = item;
+      outText.append(span);
+      outText.append(br);
+    } else {
+      const span = document.createElement('span');
+      const br = document.createElement('br');
+      span.style.fontWeight = 'bold';
+      span.innerHTML = item;
+      outText.append(span);
+      outText.append(br);
+    }
+  }
+});
