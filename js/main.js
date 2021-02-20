@@ -8,7 +8,7 @@
 const day = new Date();
 const outText = document.querySelector('.out');
 
-const formateDate = (date) => {
+const formateDate = date => {
   let getDate = date.getDate();
   if (getDate < 10) getDate = '0' + getDate;
 
@@ -22,7 +22,7 @@ const formateDate = (date) => {
 
 };
 
-function checkTime(time) {
+const checkTime = time => {
   if (time < 10) {
     time = "0" + time;
   }
