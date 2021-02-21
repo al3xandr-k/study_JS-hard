@@ -30,3 +30,5 @@ const checkTime = time => {
 }
 
 outText.innerHTML = formateDate(day) + ' - ' + checkTime(day.getHours()) + ':' + checkTime(day.getMinutes()) + ':' + checkTime(day.getSeconds());
+
+//outText.innerHTML =day.toLocaleDateString()+ ' - '+ day.toLocaleTimeString();
