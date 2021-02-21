@@ -10,8 +10,8 @@ week.map((day, indexDay) => {
     if (indexDay === currentDay) {
       const span = document.createElement('span');
       const br = document.createElement('br');
-      span.style.fontStyle = 'italic';
       span.innerHTML = day;
+      span.style.fontStyle = 'italic';
       outText.append(span);
       outText.append(br);
     } else {
@@ -25,9 +25,9 @@ week.map((day, indexDay) => {
     if (indexDay === currentDay) {
       const span = document.createElement('span');
       const br = document.createElement('br');
+      span.innerHTML = day;
       span.style.fontWeight = 'bold';
       span.style.fontStyle = 'italic';
-      span.innerHTML = day;
       outText.append(span);
       outText.append(br);
     } else {
