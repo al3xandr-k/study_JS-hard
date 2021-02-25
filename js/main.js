@@ -1,7 +1,7 @@
 const btn = document.querySelector('.btn');
 
 
-btn.addEventListener('click', () => {
+btn.addEventListener('click', function() {
   const body = document.querySelector('body');
 
   let r;
@@ -16,5 +16,5 @@ btn.addEventListener('click', () => {
   color = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
   body.style.backgroundColor = color;
 
-  btn.innerHTML = color;
+  this.innerHTML = color;
 })
