@@ -1,8 +1,11 @@
 'use strict'
 
+const week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+const outText1 = document.querySelector('.out1');
+const outText2 = document.querySelector('.out2');
+
 setInterval(() => {
   const date = new Date();
-  const outText = document.querySelector('.out');
   const hours = date.getHours();
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
@@ -27,5 +30,7 @@ setInterval(() => {
     return time;
   }
 
-  outText.innerHTML = formateDate(date) + ' - ' + checkTime(hours) + ':' + checkTime(minutes) + ':' + checkTime(seconds);
+
+  outText1.textContent = 'a) ' + checkTime(hours) + ' час ' + checkTime(minutes) + ' минут ' + checkTime(seconds) + ' секунды';
+  outText2.textContent = 'б) ' + formateDate(date) + ' - ' + checkTime(hours) + ':' + checkTime(minutes) + ':' + checkTime(seconds);
 }), (1000);
