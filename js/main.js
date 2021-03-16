@@ -83,19 +83,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//Menu Hamburger.
 	const toggleMenu = () => {
-		const btnMenu = document.querySelector('.menu');
+		const body = document.querySelector('body');
 		const menu = document.querySelector('menu');
-		const btnClose = document.querySelector('.close-btn');
-		const menuItem = menu.querySelectorAll('ul > li');
+
+		body.addEventListener('click', (event) => {
+			let target = event.target;
+
+			if (target.closest('.menu')) {
+				handlerMenu();
+			} else if (target.classList.contains('close-btn')) {
+				handlerMenu();
+			} else if (target.tagName === 'A' && target.closest('menu')) {
+				handlerMenu();
+			} else if (target.closest('menu')) {
+				return;
+			} else {
+				menu.classList.remove('active-menu');
+			};
+		});
 
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
 		};
-
-		btnMenu.addEventListener('click', handlerMenu);
-		btnClose.addEventListener('click', handlerMenu);
-		menuItem.forEach(item => item.addEventListener('click', handlerMenu));
-
 	};
 	toggleMenu();
 
@@ -103,7 +112,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	const togglePopUp = () => {
 		const popUp = document.querySelector('.popup');
 		const btnPopUp = document.querySelectorAll('.popup-btn');
-		const btnPopUpClose = document.querySelector('.popup-close');
 		const popUpContent = document.querySelector('.popup-content');
 
 		btnPopUp.forEach(elem => {
@@ -148,15 +156,53 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 
-		btnPopUpClose.addEventListener('click', () => {
-			popUp.style.display = 'none';
-		});
+		popUp.addEventListener('click', (event) => {
+			let target = event.target;
 
-		popUp.addEventListener('click', () => {
-			popUp.style.display = 'none';
+			if (target.classList.contains('popup-close')) {
+				popUp.style.display = 'none';
+			} else {
+				target = target.closest('.popup-content');
+
+				if (!target) {
+					popUp.style.display = 'none';
+				};
+			};
 		});
 	};
 	togglePopUp();
 
+	//Tabs
+	const tabs = () => {
+		const serviceHeader = document.querySelector('.service-header');
+		const serviceHeaderTab = serviceHeader.querySelectorAll('.service-header-tab');
+		const serviceTab = document.querySelectorAll('.service-tab');
 
+		const toogleTabContent = (index) => {
+			for (let i = 0; i < serviceTab.length; i++) {
+				if (index === i) {
+					serviceHeaderTab[i].classList.add('active');
+					serviceTab[i].classList.remove('d-none');
+				} else {
+					serviceHeaderTab[i].classList.remove('active');
+					serviceTab[i].classList.add('d-none');
+				};
+			};
+		};
+
+		serviceHeader.addEventListener('click', (event) => {
+			let target = event.target;
+			target = target.closest('.service-header-tab');
+
+			if (target) {
+				serviceHeaderTab.forEach((item, index) => {
+					if (item === target) {
+						toogleTabContent(index);
+					};
+				});
+			};
+		});
+	};
+
+	tabs();
 });
