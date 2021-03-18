@@ -76,7 +76,18 @@ class Todo {
     todoData.forEach(item => {
       if (item.key === target.key) {
         item.completed = !item.completed;
-      }
+      };
+    });
+  };
+
+  editItem = (todoData, event) => {
+    const target = event.target.closest('.todo-item');
+
+    todoData.forEach(item => {
+      if (item.key === target.key) {
+        target.setAttribute('contenteditable', 'true');
+        console.log(target);
+      };
     });
   };
 
@@ -89,6 +100,9 @@ class Todo {
         this.render();
       } else if (target.closest('.todo-remove')) {
         this.deleteItem(this.todoData, event);
+        this.render();
+      } else if (target.closest('.todo-edit')) {
+        this.editItem(this.todoData, event);
         this.render();
       };
     });
