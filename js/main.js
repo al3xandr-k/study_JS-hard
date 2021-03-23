@@ -354,15 +354,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const calcItem = document.querySelectorAll('input.calc-item');
 
 		const firstForm = document.getElementById('form1');
-		const firstFormName = document.getElementById('form1-name');
-		const firstFormEmail = document.getElementById('form1-email');
-		const firstFormPhone = document.getElementById('form1-phone');
-
 		const secondForm = document.getElementById('form2');
-		const secondFormName = document.getElementById('form2-name');
-		const secondFormMessage = document.getElementById('form2-message');
-		const secondFormEmail = document.getElementById('form2-email');
-		const secondFormPhone = document.getElementById('form2-phone');
 
 		//Section calc sum inputs.
 		calcItem.forEach(item => {
