@@ -436,13 +436,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		const calcSquare = document.querySelector('.calc-square');
 		const calcCount = document.querySelector('.calc-count');
 		const calcDay = document.querySelector('.calc-day');
-		const totalValue = document.getElementById('total');
-
+		let totalValue = document.getElementById('total');
 
 		const countSum = () => {
 			let total = 0;
 			let countValue = 1;
 			let dayValue = 1;
+			let time = 10000;
+			let step = 1;
 
 			const squareValue = +calcSquare.value;
 			const typeValue = calcType.options[calcType.selectedIndex].value;
@@ -459,11 +460,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (typeValue && squareValue) {
 				total = price * squareValue * typeValue * countValue * dayValue;
-			} else {
-				total = 0;
+			};
+
+
+
+			function outNum(num, elem) {
+
+				let n = 0;
+				let t = Math.round(time / (num / step));
+				let interval = setInterval(() => {
+					n += step;
+					if (n === num) {
+						clearInterval(interval);
+					}
+					elem.textContent = n;
+				},
+					t);
+			};
+
+			if (total > 0) {
+				outNum(total, totalValue);
+
 			}
 
-			totalValue.textContent = total;
+			//totalValue.textContent = total;
 		};
 
 		calcBlock.addEventListener('change', (event) => {
@@ -475,5 +495,5 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	calc(100);
+	calc();
 });
