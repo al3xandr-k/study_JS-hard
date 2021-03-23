@@ -377,17 +377,17 @@ window.addEventListener('DOMContentLoaded', () => {
 			firstForm.classList.add('focused');
 
 			if (target.closest('#form1-name')) {
-				firstFormName.addEventListener('input', () => {
-					firstFormName.value = firstFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-					firstFormName.value = firstFormName.value.trim().slice(0, 1).toUpperCase() + firstFormName.value.trim().slice(1).toLowerCase();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+					target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
 				});
 			} else if (target.closest('#form1-email')) {
-				firstFormEmail.addEventListener('input', () => {
-					firstFormEmail.value = firstFormEmail.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
 				});
 			} else if (target.closest('#form1-phone')) {
-				firstFormPhone.addEventListener('input', () => {
-					firstFormPhone.value = firstFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
 				});
 			}
 
@@ -403,21 +403,21 @@ window.addEventListener('DOMContentLoaded', () => {
 			secondForm.classList.add('focused');
 
 			if (target.closest('#form2-name')) {
-				secondFormName.addEventListener('input', () => {
-					secondFormName.value = secondFormName.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-					secondFormName.value = secondFormName.value.trim().slice(0, 1).toUpperCase() + secondFormName.value.trim().slice(1).toLowerCase();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+					target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
 				});
 			} else if (target.closest('#form2-email')) {
-				secondFormEmail.addEventListener('input', () => {
-					secondFormEmail.value = secondFormEmail.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
 				});
 			} else if (target.closest('#form2-phone')) {
-				secondFormPhone.addEventListener('input', () => {
-					secondFormPhone.value = secondFormPhone.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
 				});
 			} else if (target.closest('#form2-message')) {
-				secondFormMessage.addEventListener('input', () => {
-					secondFormMessage.value = secondFormMessage.value.replace(/[a-z]/gi, '');
+				target.addEventListener('input', () => {
+					target.value = target.value.replace(/[a-z]/gi, '');
 				});
 			}
 		});
@@ -442,7 +442,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			let total = 0;
 			let countValue = 1;
 			let dayValue = 1;
-			let time = 10000;
+			let time = 0.01;
 			let step = 1;
 
 			const squareValue = +calcSquare.value;
