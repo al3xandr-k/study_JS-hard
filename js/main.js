@@ -462,8 +462,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				total = price * squareValue * typeValue * countValue * dayValue;
 			};
 
-
-
 			function outNum(num, elem) {
 
 				let n = 0;
@@ -474,16 +472,12 @@ window.addEventListener('DOMContentLoaded', () => {
 						clearInterval(interval);
 					}
 					elem.textContent = n;
-				},
-					t);
+				}, t);
 			};
 
 			if (total > 0) {
 				outNum(total, totalValue);
-
-			}
-
-			//totalValue.textContent = total;
+			};
 		};
 
 		calcBlock.addEventListener('change', (event) => {
