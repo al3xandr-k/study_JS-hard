@@ -1,6 +1,25 @@
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
+	//Animation.
+	const animate = ({ timing, draw, duration }) => {
+
+		let start = performance.now();
+
+		requestAnimationFrame(function animate(time) {
+			let timeFraction = (time - start) / duration;
+			if (timeFraction > 1) timeFraction = 1;
+
+			let progress = timing(timeFraction);
+
+			draw(progress);
+
+			if (timeFraction < 1) {
+				requestAnimationFrame(animate);
+			}
+		});
+	};
+
 	//Timer.
 	const timer = deadline => {
 		const timerHours = document.querySelector('#timer-hours');
@@ -117,26 +136,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		btnPopUp.forEach(elem => {
 			elem.addEventListener('click', () => {
 				popUp.style.display = 'block';
-
-				//PopUp animation.
-				function animate({ timing, draw, duration }) {
-
-					let start = performance.now();
-
-					requestAnimationFrame(function animate(time) {
-						let timeFraction = (time - start) / duration;
-						if (timeFraction > 1) timeFraction = 1;
-
-						let progress = timing(timeFraction);
-
-						draw(progress);
-
-						if (timeFraction < 1) {
-							requestAnimationFrame(animate);
-						}
-
-					});
-				}
 
 				if (window.screen.width > 768) {
 					animate({
@@ -434,8 +433,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			let total = 0;
 			let countValue = 1;
 			let dayValue = 1;
-			let time = 0.01;
-			let step = 1;
 
 			const squareValue = +calcSquare.value;
 			const typeValue = calcType.options[calcType.selectedIndex].value;
@@ -454,22 +451,15 @@ window.addEventListener('DOMContentLoaded', () => {
 				total = price * squareValue * typeValue * countValue * dayValue;
 			};
 
-			function outNum(num, elem) {
-
-				let n = 0;
-				let t = Math.round(time / (num / step));
-				let interval = setInterval(() => {
-					n += step;
-					if (n === num) {
-						clearInterval(interval);
-					}
-					elem.textContent = n;
-				}, t);
-			};
-
-			if (total > 0) {
-				outNum(total, totalValue);
-			};
+			animate({
+				duration: 2000,
+				timing(timeFraction) {
+					return timeFraction;
+				},
+				draw(progress) {
+					totalValue.textContent = Math.floor(progress * total);
+				}
+			});
 		};
 
 		calcBlock.addEventListener('change', (event) => {
