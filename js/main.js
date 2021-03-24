@@ -156,15 +156,24 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 
 		popUp.addEventListener('click', (event) => {
+			const form3Name = document.getElementById('form3-name');
+			const form3Phone = document.getElementById('form3-phone');
+			const form3Email = document.getElementById('form3-email');
+
 			let target = event.target;
 
 			if (target.classList.contains('popup-close')) {
 				popUp.style.display = 'none';
+				form3Name.value = '';
+				form3Phone.value = '';
+				form3Email.value = '';
 			} else {
 				target = target.closest('.popup-content');
-
 				if (!target) {
 					popUp.style.display = 'none';
+					form3Name.value = '';
+					form3Phone.value = '';
+					form3Email.value = '';
 				};
 			};
 		});
@@ -351,9 +360,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	//RegExp section calc sum.
 	const regularExpression = () => {
 		const calcItem = document.querySelectorAll('input.calc-item');
-
-		const firstForm = document.getElementById('form1');
-		const secondForm = document.getElementById('form2');
+		const body = document.querySelector('body');
 
 		//Section calc sum inputs.
 		calcItem.forEach(item => {
@@ -362,59 +369,34 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 
-		firstForm.addEventListener('focusin', (event) => {
+		body.addEventListener('input', (event) => {
 			const target = event.target;
 
-			firstForm.classList.add('focused');
-
-			if (target.closest('#form1-name')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-					target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
-				});
-			} else if (target.closest('#form1-email')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
-				});
-			} else if (target.closest('#form1-phone')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
-				});
-			}
-
-		});
-
-		firstForm.addEventListener('focusout', () => {
-			firstForm.classList.remove('focused');
-		});
-
-		secondForm.addEventListener('focusin', (event) => {
-			const target = event.target;
-
-			secondForm.classList.add('focused');
-
-			if (target.closest('#form2-name')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
-					target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
-				});
-			} else if (target.closest('#form2-email')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[а-я+\s/()<>"\]#$%^&\[:;,+\\?=`|}{]/gi, '').trim();
-				});
-			} else if (target.closest('#form2-phone')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
-				});
-			} else if (target.closest('#form2-message')) {
-				target.addEventListener('input', () => {
-					target.value = target.value.replace(/[a-z]/gi, '');
-				});
+			if (target.placeholder === 'Ваше имя') {
+				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
+			} else if (target.placeholder === 'E-mail' || target.placeholder === 'Ваш E-mail') {
+				target.value = target.value.replace(/[а-я+\s+/()<>"\]#$%^&\[:;,\s+\\?=`|}{]/gi, '');
+			} else if (target.placeholder === 'Номер телефона' || target.placeholder === "Ваш номер телефона") {
+				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+			} else if (target.placeholder === 'Ваше сообщение') {
+				target.value = target.value.replace(/[a-z]/gi, '');
 			}
 		});
 
-		secondForm.addEventListener('focusout', () => {
-			secondForm.classList.remove('focused');
+		body.addEventListener('focusout', (event) => {
+			const target = event.target;
+
+			if (target.placeholder === 'Ваше имя') {
+				target.value = target.value.replace(/[a-z\d/.,:;-=()\]!@#$%^&*_`\[+<>"№?]/gi, '');
+				target.value = target.value.trim().slice(0, 1).toUpperCase() + target.value.trim().slice(1).toLowerCase();
+			} else if (target.placeholder === 'E-mail' || target.placeholder === 'Ваш E-mail') {
+				target.value = target.value.replace(/[^\w\s+/@\-\.]|()(?=\1)/gi, '');
+			} else if (target.placeholder === 'Номер телефона' || target.placeholder === "Ваш номер телефона") {
+				target.value = target.value.replace(/[a-zа-я\s/.,!@#$%^&\]=*<>\["№?:;{}|_~`]/gi, '').trim();
+			} else if (target.placeholder === 'Ваше сообщение') {
+				target.value = target.value.replace(/[a-z]/gi, '');
+			}
 		});
 
 	};
