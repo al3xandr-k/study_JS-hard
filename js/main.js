@@ -456,7 +456,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	//Send ajax-form
 	const sendForm = () => {
 		const errorMessage = 'Что то пошло не так...';
-		const loadMessage = 'Загрузка...';
+		// const loadMessage = 'Загрузка...';
 		const successMessage = 'Ваша заявка отправлена! Мы с вами свяжемся!';
 
 		const form = document.querySelectorAll('form');
@@ -482,6 +482,13 @@ window.addEventListener('DOMContentLoaded', () => {
 				postData(body, () => {
 					setTimeout(() => {
 						preloader.style.display = 'none';
+
+						form.forEach(item => {
+							item.reset();
+						});
+
+						statusMessage.textContent = successMessage;
+						statusMessage.style.color = '#fff';
 					}, 3000);
 				}, (error) => {
 					statusMessage.textContent = errorMessage;
@@ -503,15 +510,13 @@ window.addEventListener('DOMContentLoaded', () => {
 					outputData();
 
 					setTimeout(() => {
-						form.forEach(item => {
-							item.reset();
-						});
-						statusMessage.textContent = successMessage;
-					}, 3000);
-
-					setTimeout(() => {
 						statusMessage.textContent = '';
-					}, 7000);
+					}, 6000);
+
+					setTimeout(() => { 
+						const popup = document.querySelector('.popup');
+						popup.style.display = 'none';
+					}, 6500);
 
 				} else {
 					errorData(request.status);
