@@ -462,6 +462,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		const form = document.querySelectorAll('form');
 		const statusMessage = document.createElement('div');
 
+		const inputs = document.querySelectorAll('input');
+		console.log('inputs: ', inputs);
+
 		form.forEach(item => {
 			item.addEventListener('submit', (event) => {
 				event.preventDefault();
@@ -513,7 +516,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						statusMessage.textContent = '';
 					}, 6000);
 
-					setTimeout(() => { 
+					setTimeout(() => {
 						const popup = document.querySelector('.popup');
 						popup.style.display = 'none';
 					}, 6500);
