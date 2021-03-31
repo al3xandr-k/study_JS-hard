@@ -5,25 +5,37 @@ document.addEventListener('DOMContentLoaded', () => {
         output = document.getElementById('output');
 
     select.addEventListener('change', () => {
-        const request = new XMLHttpRequest();
-        request.open('GET', 'cars.json');
-        request.setRequestHeader('Content-type', 'application/json');
-        request.send();
+        const getData = (url) => {
+            return new Promise((resolve, reject) => {
+                const request = new XMLHttpRequest();
+                request.open('GET', url);
+                request.setRequestHeader('Content-type', 'application/json');
 
-        request.addEventListener('readystatechange', () => {
-            if (request.readyState === 4 && request.status === 200) {
-                const data = JSON.parse(request.responseText);
-                data.cars.forEach(item => {
-                    if (item.brand === select.value) {
-                        const {brand, model, price} = item;
+                request.addEventListener('readystatechange', () => {
+                    if (request.readyState === 4 && request.status === 200) {
+                        const data = JSON.parse(request.responseText);
+                        resolve(data);
+                        const outputCars = (cars) => {
+                            data.cars.forEach(item => {
+                                if (item.brand === select.value) {
+                                    const { brand, model, price } = item;
 
-                        output.innerHTML = `Тачка ${brand} ${model} <br>
-                        Цена: ${price}$`;
+                                    output.insertAdjacentHTML('beforebegin', `Тачка ${brand} ${model} <br>
+                            Цена: ${price}$`);
+                                }
+                            });
+                        }
+                    } else {
+                        reject(request.statusText);
                     }
                 });
-            } else {
-                output.innerHTML = 'Произошла ошибка';
-            }
-        });
+                request.send();
+            });
+        }
+        const cars = getData('cars.json');
+
+        Promise.all(cars)
+            .then(outputCars)
+            .catch(error => console.error(error));
     });
 });
