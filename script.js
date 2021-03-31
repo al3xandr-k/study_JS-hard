@@ -16,23 +16,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 request.addEventListener('readystatechange', () => {
                     if (request.readyState === 4 && request.status === 200) {
                         const data = JSON.parse(request.responseText);
-                        data.cars.forEach(item => {
-                            if (item.brand === select.value) {
-                                const { brand, model, price } = item;
-
-                                output.innerHTML = `
-                  brand: ${brand}, model: ${model} <br>
-                  price: ${price}
-                  `;
-                            };
-                        });
+                        resolve(data);
                     } else {
-                        output.innerHTML = 'Error';
+                        reject(request.statusText);
                     };
                 });
                 request.send();
             });
         };
-        getData('cars.json');
+
+        const outputCars = (data) => {
+            data.cars.forEach(item => {
+                if (item.brand === select.value) {
+                    const { brand, model, price } = item;
+
+                    output.insertAdjacentHTML('beforebegin', `
+                    brand: ${brand}, model: ${model} <br>
+                    price: ${price}`
+                    );
+                };
+            });
+        };
+
+        const carsData = getData('cars.json');
+
+        Promise.race(carsData)
+            .then(outputCars)
+            .catch(error => console.error(error));
     });
 });
