@@ -12,30 +12,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 request.setRequestHeader('Content-type', 'application/json');
 
                 request.addEventListener('readystatechange', () => {
-                    if (request.readyState === 4 && request.status === 200) {
+                    if (request.readyState === 4) {
+                        return;
+                    };
+
+                    if (request.status === 200) {
                         const data = JSON.parse(request.responseText);
                         resolve(data);
-                        const outputCars = (cars) => {
-                            data.cars.forEach(item => {
-                                if (item.brand === select.value) {
-                                    const { brand, model, price } = item;
-
-                                    output.insertAdjacentHTML('beforebegin', `Тачка ${brand} ${model} <br>
-                            Цена: ${price}$`);
-                                }
-                            });
-                        }
                     } else {
                         reject(request.statusText);
-                    }
+                    };
                 });
                 request.send();
             });
-        }
-        const cars = getData('cars.json');
+        };
 
-        Promise.all(cars)
-            .then(outputCars)
-            .catch(error => console.error(error));
+        const outputCars = (data) => {
+            console.log('data: ', data);
+            data.cars.forEach(item => {
+                console.log('item: ', item);
+                if (item.brand === select.value) {
+                    const { brand, model, price } = item;
+
+                    output.insertAdjacentHTML('beforebegin', `Тачка ${brand} ${model} <br>
+            Цена: ${price}$`);
+                }
+            });
+
+            const cars = getData('cars.json');
+
+            Promise.race(cars)
+                .then(outputCars)
+                .catch(error => console.error(error));
+        }
     });
 });
