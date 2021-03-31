@@ -15,26 +15,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 request.addEventListener('readystatechange', () => {
                     if (request.readyState === 4 && request.status === 200) {
-                        const data = JSON.parse(request.responseText);
-                        resolve(data);
-
-                        data.cars.forEach(item => {
-                            if (item.brand === select.value) {
-                                const { brand, model, price } = item;
-
-                                output.innerHTML = `
-                  brand: ${brand}, model: ${model} <br>
-                  price: ${price}
-                  `;
-                            };
-                        });
+                        const response = JSON.parse(request.responseText);
+                        console.log('response: ', response);
+                        resolve(response);
                     } else {
                         reject(request.statusText);
                     };
                 });
                 request.send();
             });
+        };
+
+        const outputData = (data) => {
+
+            data.forEach(item => {
+                if (item.brand === select.value) {
+                    const { brand, model, price } = item;
+
+                    output.innerHTML = `
+                    brand: ${brand}, model: ${model} <br>
+                    price: ${price}
+                    `;
+                };
+            });
         }
-        getData('cars.json');
+        const urlJson = 'cars.json';
+
+        const oneCar = getData(urlJson[0]);
+        const twoCar = getData(urlJson[1]);
+
+        Promise.all([oneCar, twoCar])
+            .then(outputData)
+            .catch(error => console.error(error));
     });
 });
