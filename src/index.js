@@ -13,7 +13,7 @@ import sendForm from './modules/sendForm';
 
 
 //Timer.
-timer('2021-03-17');
+timer('2021-04-17');
 
 //Smooth scroll to section.
 smoothScroll();
